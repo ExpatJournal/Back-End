@@ -16,13 +16,13 @@ function loginFindBy(filter) {
 function findBy(filter) {
   return db('users')
             .where(filter)
-            .select('id','username');
+            .select('id','displayName AS username');
 };
 
 function findById(id) {
   return db('users')
           .where({id})
-          .select('id','username')
+          .select('id','displayName AS username')
           .first();
 };
 

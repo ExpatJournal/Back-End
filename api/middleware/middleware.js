@@ -8,6 +8,8 @@ module.exports = {
 
 function checkCredentials(req, res, next) {
   let { username, password } = req.body;
+  let displayName = username;
+  username = username.toLowerCase();
   let error = 0;
 
   if( username === undefined || username.trim() === "" ) { error++; };
@@ -21,7 +23,7 @@ function checkCredentials(req, res, next) {
     case 3:
       return res.status(400).json({ message: 'username and password is required' });
     default:
-      req.user = { username, password };
+      req.user = { username, displayName, password };
       next();
   };
 };

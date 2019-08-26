@@ -5,6 +5,9 @@ exports.up = function(knex) {
     t.string('username', 25)
       .notNullable()
       .unique();
+      t.string('displayName', 25)
+        .notNullable()
+        .unique();
     t.string('password', 25)
       .notNullable();
   })
