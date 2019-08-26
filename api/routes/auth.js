@@ -16,6 +16,7 @@ router.post('/login', mw.checkCredentials, (req, res) => {
         .then(user => {
           if(user && bcrypt.compareSync(password, user.password)) {
             const token = getToken(user);
+            console.log("user", user);
 
             res.status(200).json({
               username: user.displayName,
@@ -30,7 +31,7 @@ router.post('/login', mw.checkCredentials, (req, res) => {
         });
 });
 
-router.post('/register', mw.checkCredentials, async (req, res) => {
+router.post('/register', mw.checkRegisterCredentials, async (req, res) => {
   try {
     req.user.password = getHash(req.user.password);
 
@@ -60,7 +61,7 @@ function getToken(user) {
     username: user.username,
   };
 
-  const options = { expiresIn: '1h' };
+  const options = { expiresIn: '1d' };
 
   return jwt.sign(payload, secrets.jwtSecrets, options);
 }
