@@ -16,9 +16,10 @@ exports.up = function(knex) {
       .notNullable()
       .unsigned()
       .references('id')
-      .inTable('user')
+      .inTable('users')
       .onDelete('RESTRICT')
       .onUpdate('CASCADE');
+    t.string('location', 255);
     t.string('post', 21000);
     t.integer('created_date')
       .notNullable();
@@ -37,11 +38,31 @@ exports.up = function(knex) {
     t.string('url', 255)
       .notNullable();
     t.string('caption', 2100);
+  })
+  .createTable('comments', t => {
+    t.increments();
+    t.integer('post_id')
+      .notNullable()
+      .unsigned()
+      .references('id')
+      .inTable('journal')
+      .onDelete('RESTRICT')
+      .onUpdate('CASCADE');
+    t.integer('author_id')
+      .notNullable()
+      .unsigned()
+      .references('id')
+      .inTable('users')
+      .onDelete('RESTRICT')
+      .onUpdate('CASCADE');
+    t.string('comment', 2100)
+      .notNullable();
   });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('media')
+  return knex.schema.dropTableIfExists('comments')
+    .dropTableIfExists('media')
     .dropTableIfExists('journal')
     .dropTableIfExists('users');
 };

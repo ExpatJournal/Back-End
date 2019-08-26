@@ -1,8 +1,8 @@
 exports.seed = function(knex, Promise) {
-  return knex('users').insert([
+  return knex('media').insert([
     {
-      url: "www.example.com",
       post_id: 1,
+      url: "www.example.com",
       caption: "This media doesn't link anywhere"
     },
   ])
