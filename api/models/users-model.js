@@ -4,6 +4,13 @@ module.exports = {
   add,
   findBy,
   findById,
+  loginFindBy
+};
+
+function loginFindBy(filter) {
+  return db('users')
+            .where(filter)
+            .first();
 };
 
 function findBy(filter) {

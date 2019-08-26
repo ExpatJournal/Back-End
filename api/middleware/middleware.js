@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 const secrets = require('../config/secrets');
-const bcrypt = require('bcrypt');
 
 module.exports = {
+  restricted,
   checkCredentials
 };
 
@@ -21,12 +21,27 @@ function checkCredentials(req, res, next) {
     case 3:
       return res.status(400).json({ message: 'username and password is required' });
     default:
-      password = getHash(password);
       req.user = { username, password };
       next();
   };
 };
 
-function getHash(toBeHashed) {
-  return bcrypt.hashSync(toBeHashed, 14);
+function restricted(req, res, next) {
+  const token = req.headers.authorization;
+  console.log(token);
+
+  if(token) {
+    jwt.verify(token, secrets.jwtSecrets, (err, decodedToken) => {
+      if(err) {
+        res.status(401).json({ message: 'Not Authorized' });
+      } else {
+        req.user = {
+          username: decodedToken.username,
+        };
+        next();
+      };
+    });
+  } else {
+    res.status(400).json({ error: 'Auth token required' });
+  }
 }
