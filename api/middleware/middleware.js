@@ -60,7 +60,6 @@ function checkCredentials(req, res, next) {
 
   if( username === undefined || username.trim() === "" ) { error++; };
   if( password === undefined || password.trim() === "" ) { error = error + 2; };
-  if( email === undefined || email.trim() === "") { error = error + 4; }
 
   switch(error) {
     case 1:
@@ -69,14 +68,6 @@ function checkCredentials(req, res, next) {
       return res.status(400).json({ error: 'password is required' });
     case 3:
       return res.status(400).json({ error: 'username and password is required' });
-    case 4:
-      return res.status(400).json({ error: 'email is required' });
-    case 5:
-      return res.status(400).json({ error: 'username and email are required' });
-    case 6:
-      return res.status(400).json({ error: 'password and email are required' });
-    case 7:
-      return res.status(400).json({ error: 'username, password, and email are required' });
     default:
       req.user = { username, displayName, email,  password };
       next();
