@@ -28,9 +28,12 @@ function findById(id) {
           .first();
 }
 
-function update(postInfo, id) {
+function update(postInfo, id, userId) {
   return db('journal')
-          .where({ id })
+          .where( function() {
+            this.where({ id })
+              .andWhere('author_id', '=', userId)
+          })
           .update(postInfo)
           .then( updated => {
             return updated && findById(id);

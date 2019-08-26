@@ -53,14 +53,19 @@ router.post('/', mw.restricted, mw.postCheck, async (req, res) => {
 
 router.put('/:id', mw.restricted, mw.postCheck, async (req, res) => {
   const { id } = req.params;
+  
   try {
     const now = Date.now();
     req.post = {
       ...req.post,
       updated_date: now
     };
-    const post = await Posts.update(req.post, id);
-    res.status(200).json(post);
+    const post = await Posts.update(req.post, id, req.user.id);
+    if(post) {
+      res.status(200).json(post);
+    } else {
+      res.status(404).json({ error: 'the post you are trying to update does not exist' });
+    }
   }
   catch(err) {
     res.status(500).json({ error: 'something went wrong adding post to database' });
