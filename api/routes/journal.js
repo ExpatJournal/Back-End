@@ -64,7 +64,7 @@ router.put('/:id', mw.restricted, mw.postCheck, async (req, res) => {
     if(post) {
       res.status(200).json(post);
     } else {
-      res.status(404).json({ error: 'the post you are trying to update does not exist' });
+      res.status(400).json({ error: 'you do not have permission to edit this post' });
     }
   }
   catch(err) {
