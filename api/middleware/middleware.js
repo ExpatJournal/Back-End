@@ -69,7 +69,7 @@ function checkCredentials(req, res, next) {
     case 3:
       return res.status(400).json({ error: 'username and password is required' });
     default:
-      req.user = { username, displayName, email,  password };
+      req.user = { username, displayName,  password };
       next();
   };
 };
