@@ -11,7 +11,7 @@ function findAll() {
   return db('media');
 };
 
-function find(id, limit, offset) {
+function find(id) {
   return db('journal_media AS jm')
           .innerJoin('media AS m', 'jm.media_id', 'm.id')
           .innerJoin('journal AS j', 'jm.post_id', 'j.id')

@@ -8,13 +8,16 @@ const Media = require('../models/media-model');
 const router = express.Router();
 
 router.get('/posts', async (req, res) => {
-  const limit = req.query.limit || 20;
-  const offset = req.query.offset * limit || 0;
-
   try {
-    const posts = await Posts.find(limit, offset);
-    const media = await Media.find(id, limit, offset);
-    post.media = media;
+    const limit = req.query.limit || 20;
+    const offset = req.query.offset * limit || 0;
+
+    let posts = await Posts.find(limit, offset);
+    for(let i=0; i<posts.length; i++) {
+      let media = await Media.find(posts[i].id);
+      posts[i].media = media;
+    }
+
     if(posts.length > 0) {
       res.status(200).json(posts);
     } else {
@@ -22,6 +25,7 @@ router.get('/posts', async (req, res) => {
     }
   }
   catch(err) {
+    console.log(err);
     res.status(500).json({ error: 'something went wrong getting posts from the database' });
   };
 });
