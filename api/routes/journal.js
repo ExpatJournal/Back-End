@@ -3,12 +3,16 @@ const express = require('express');
 const mw = require('../middleware/middleware');
 
 const Posts = require('../models/journal-model');
+const Media = require('../models/media-model');
 
 const router = express.Router();
 
 router.get('/', mw.restricted, async (req, res) => {
+  const limit = req.query.limit || 20;
+  const offset = req.query.offset * limit || 0;
+
   try {
-    const posts = await Posts.find(req.user.id);
+    const posts = await Posts.findBy({ author_id: req.user.id }, limit, offset);
     if(posts.length > 0) {
       res.status(200).json(posts);
     } else {
@@ -21,19 +25,42 @@ router.get('/', mw.restricted, async (req, res) => {
 });
 
 router.get('/:id', mw.restricted, async (req, res) => {
-  const { id } = req.params;
   try {
-    const post = Posts.findById(id);
-    if(post.length > 0) {
-      res.status(200).json(post);
+    const { id } = req.params;
+    
+    const post = await Posts.findById(id);
+    
+    if(post) {
+      if(post.author_id === req.user.id) {
+        res.status(200).json(post);
+      } else {
+        res.status(401).json({ error: 'this is not your post' });
+      }
     } else {
       res.status(404).json({ error: 'the post you are searching for does not exist' });
     }
   }
   catch(err) {
     res.status(500).json({ error: 'something went wrong retrieving the post from the database' });
+  };
+});
+
+router.get('/:id/media', mw.restricted, async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const media = await Media.find(id);
+    console.log('media',media);
+    if(media.length > 0) {
+      res.status(200).json(media);
+    } else {
+      res.status(404).json({ error: 'there is no media for this post' });
+    }
   }
-})
+  catch(err) {
+    res.status(500).json({ error: 'there was a problem getting the media for this post' });
+  };
+});
 
 router.post('/', mw.restricted, mw.postCheck, async (req, res) => {
   try {

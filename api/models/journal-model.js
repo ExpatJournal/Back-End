@@ -3,6 +3,7 @@ const db = require('../config/config');
 module.exports = {
   add,
   find,
+  findBy,
   findById,
   update,
   remove
@@ -17,10 +18,18 @@ function add(postInfo) {
           });
 };
 
-function find(id) {
+function find(limit, offset) {
   return db('journal')
-          .where('author_id', '=', id);
+          .offset(offset)
+          .limit(limit);
 };
+
+function findBy(filter, limit, offset) {
+  return db('journal')
+          .where(filter)
+          .offset(offset)
+          .limit(limit);
+}
 
 function findById(id) {
   return db('journal')
