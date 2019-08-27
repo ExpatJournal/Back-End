@@ -11,7 +11,7 @@ exports.up = function(knex) {
     t.string('email', 30)
       .notNullable()
       .unique();
-    t.string('password', 25)
+    t.string('password', 255)
       .notNullable();
   })
   .createTable('journal', t => {
