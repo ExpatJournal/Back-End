@@ -37,6 +37,13 @@ exports.up = function(knex) {
     t.string('url', 255)
       .notNullable();
     t.string('caption', 2100);
+    t.integer('owner_id')
+      .notNullable()
+      .unsigned()
+      .references('id')
+      .inTable('users')
+      .onDelete('RESTRICT')
+      .onUpdate('CASCADE');
   })
   .createTable('journal_media', t => {
     t.increments();

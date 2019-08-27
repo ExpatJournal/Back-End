@@ -27,8 +27,12 @@ router.get('/', mw.restricted, async (req, res) => {
 router.get('/:id', mw.restricted, async (req, res) => {
   try {
     const { id } = req.params;
+    const limit = req.query.limit || 20;
+    const offset = req.query.offset * limit || 0;
     
-    const post = await Posts.findById(id);
+    const post = await Posts.findById(id, limit, offset);
+    const media = await Media.find(id);
+    post.media = media;
     
     if(post) {
       if(post.author_id === req.user.id) {
@@ -50,7 +54,7 @@ router.get('/:id/media', mw.restricted, async (req, res) => {
     const { id } = req.params;
     
     const media = await Media.find(id);
-    console.log('media',media);
+    
     if(media.length > 0) {
       res.status(200).json(media);
     } else {

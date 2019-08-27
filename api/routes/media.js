@@ -6,7 +6,7 @@ const Media = require('../models/media-model');
 
 const router = express.Router();
 
-router.get('/', mw.restricted, async (req, res) => {
+router.get('/', async (req, res) => {
   try{
     const media = await Media.findAll();
     if(media.length > 0) {
@@ -17,10 +17,10 @@ router.get('/', mw.restricted, async (req, res) => {
   }
   catch(err) {
     res.status(500).json({ error: 'there was an error getting media for this post' });
-  }
+  };
 });
 
-router.get('/:id', mw.restricted, async (req, res) => {
+router.get('/:id', async (req, res) => {
 const { id } = req.params;
 
   try{
@@ -33,7 +33,7 @@ const { id } = req.params;
   }
   catch(err) {
     res.status(500).json({ error: 'there was an error getting media for this post' });
-  }
+  };
 });
 
 module.exports = router;

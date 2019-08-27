@@ -4,13 +4,13 @@ exports.seed = function(knex, Promise) {
       username: "john",
       displayName: "John",
       email: "john@email.com",
-      password: "$2b$14$jl0E1b6joN.Z6Wxlwb8QM.HMkun7r5Gn.NF1ufp0UrxGzQx5IAKyK",
+      password: "$2b$14$E3qgmoniDR4f4aELAnPMb.zIbOuwyD6ZfKtKSheWx5Txj./z5QtmO",
     },
     {
       username: "jane",
       displayName: "Jane",
       email: "jane@email.com",
-      password: "$2b$14$jl0E1b6joN.Z6Wxlwb8QM.HMkun7r5Gn.NF1ufp0UrxGzQx5IAKyK",
+      password: "$2b$14$E3qgmoniDR4f4aELAnPMb.zIbOuwyD6ZfKtKSheWx5Txj./z5QtmO",
     }
   ])
 }

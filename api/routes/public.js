@@ -13,6 +13,8 @@ router.get('/posts', async (req, res) => {
 
   try {
     const posts = await Posts.find(limit, offset);
+    const media = await Media.find(id, limit, offset);
+    post.media = media;
     if(posts.length > 0) {
       res.status(200).json(posts);
     } else {

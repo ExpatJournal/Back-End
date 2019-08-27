@@ -18,7 +18,7 @@ router.post('/login', mw.checkCredentials, (req, res) => {
             const token = getToken(user);
 
             res.status(200).json({
-              username: user.displayName,
+              username: user.username,
               token
             });
           } else {
