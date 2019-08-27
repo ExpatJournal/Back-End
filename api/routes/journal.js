@@ -49,23 +49,6 @@ router.get('/:id', mw.restricted, async (req, res) => {
   };
 });
 
-router.get('/:id/media', mw.restricted, async (req, res) => {
-  try {
-    const { id } = req.params;
-    
-    const media = await Media.find(id);
-    
-    if(media.length > 0) {
-      res.status(200).json(media);
-    } else {
-      res.status(404).json({ error: 'there is no media for this post' });
-    }
-  }
-  catch(err) {
-    res.status(500).json({ error: 'there was a problem getting the media for this post' });
-  };
-});
-
 router.post('/', mw.restricted, mw.postCheck, async (req, res) => {
   try {
     const now = Date.now();

@@ -5,7 +5,8 @@ module.exports = {
   restricted,
   checkCredentials,
   checkRegisterCredentials,
-  postCheck
+  postCheck,
+  mediaCheck
 };
 
 function checkRegisterCredentials(req, res, next) {
@@ -127,3 +128,17 @@ function postCheck(req, res, next) {
       next();
   };
 };
+
+function mediaCheck(req, res, next) {
+  const{ url, caption } = req.body;
+
+  if( url === undefined || url.trim() === "" ) {
+    res.status(400).json({ error: 'media url is required' });
+  } else {
+    req.media = {
+      url,
+      caption
+    }
+    next();
+  };
+}
