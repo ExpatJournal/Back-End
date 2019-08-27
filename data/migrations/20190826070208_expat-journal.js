@@ -27,9 +27,9 @@ exports.up = function(knex) {
       .onUpdate('CASCADE');
     t.string('location', 255);
     t.string('post', 21000);
-    t.integer('created_date')
+    t.biginteger('created_date')
       .notNullable();
-    t.integer('updated_date')
+    t.biginteger('updated_date')
       .notNullable();
   })
   .createTable('media', t => {
