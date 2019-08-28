@@ -32,6 +32,17 @@ describe('server login & register tests', () => {
 
   describe('POST /auth/users/login', () => {
     
+    it('returns 401 unauthorize', () => {
+      return request(server).post('/auth/users/login')
+      .send({
+        username: 'bhla',
+        password: 'blah'
+      })
+      .then( res => {
+        expect(res.status).toBe(401);
+      });
+    });
+    
     it('returns 200 OK', () => {
       return request(server).post('/auth/users/login')
       .send(testObj)

@@ -39,12 +39,11 @@ function add(mediaInfo) {
 };
 
 function addConnect(journalId, mediaId) {
-  console.log('media connect');
   return db('journal_media')
           .insert({
             post_id: journalId,
             media_id: mediaId
-          });
+          }).returning('id');
 };
 
 function remove(id) {
