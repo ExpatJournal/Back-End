@@ -8,7 +8,6 @@ module.exports = {
 }
 
 function add(comment, post_id, author_id) {
-  console.log(comment, post_id, author_id);
   return db('comments')
             .insert({ comment, post_id, author_id }, 'id')
             .then( ids => {
