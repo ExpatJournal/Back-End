@@ -11,7 +11,7 @@ exports.up = function(knex) {
     t.string('email', 30)
       .notNullable()
       .unique();
-    t.string('password', 25)
+    t.string('password', 255)
       .notNullable();
   })
   .createTable('journal', t => {
@@ -27,9 +27,9 @@ exports.up = function(knex) {
       .onUpdate('CASCADE');
     t.string('location', 255);
     t.string('post', 21000);
-    t.integer('created_date')
+    t.biginteger('created_date')
       .notNullable();
-    t.integer('updated_date')
+    t.biginteger('updated_date')
       .notNullable();
   })
   .createTable('media', t => {

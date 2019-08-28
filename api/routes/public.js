@@ -34,8 +34,9 @@ router.get('/posts/:id', async (req, res) => {
   try {
     const { id } = req.params;
     
-    const post = await Posts.findById(id);
-    console.log('post',post);
+    let post = await Posts.findById(id);
+    let media = await Media.find(post.id);
+    post.media = media;
   
     if(post) {
       res.status(200).json(post);
@@ -49,13 +50,18 @@ router.get('/posts/:id', async (req, res) => {
 });
 
 router.get('/user/:id', async (req, res) => {
-  const limit = req.query.limit || 20;
-  const offset = req.query.offset * limit || 0;
-
   try {
     const id = parseInt(req.params.id);
+    const limit = req.query.limit || 20;
+    const offset = req.query.offset * limit || 0;
   
-    const posts = await Posts.findBy({ author_id: id }, limit, offset);
+    let posts = await Posts.findBy({ author_id: id }, limit, offset);
+
+    for(let i=0; i<posts.length; i++) {
+      let media = await Media.find(posts[i].id);
+      posts[i].media = media;
+    }
+
     if(posts.length > 0) {
       res.status(200).json(posts);
     } else {

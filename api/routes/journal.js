@@ -12,7 +12,13 @@ router.get('/', mw.restricted, async (req, res) => {
   const offset = req.query.offset * limit || 0;
 
   try {
-    const posts = await Posts.findBy({ author_id: req.user.id }, limit, offset);
+    let posts = await Posts.findBy({ author_id: req.user.id }, limit, offset);
+
+    for(let i=0; i<posts.length; i++) {
+      let media = await Media.find(posts[i].id);
+      posts[i].media = media;
+    }
+
     if(posts.length > 0) {
       res.status(200).json(posts);
     } else {

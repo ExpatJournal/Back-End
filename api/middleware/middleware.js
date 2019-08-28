@@ -6,7 +6,8 @@ module.exports = {
   checkCredentials,
   checkRegisterCredentials,
   postCheck,
-  mediaCheck
+  mediaCheck,
+  commentCheck
 };
 
 function checkRegisterCredentials(req, res, next) {
@@ -141,4 +142,14 @@ function mediaCheck(req, res, next) {
     }
     next();
   };
-}
+};
+
+function commentCheck(req, res, next) {
+  const { comment } = req.body;
+
+  if( comment === undefined || comment.trim() === "" ) {
+    res.status(400).json({ error: 'a comment is required' });
+  } else {
+    next();
+  };
+};
