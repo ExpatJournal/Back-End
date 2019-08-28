@@ -24,7 +24,9 @@ function findAll() {
 };
 
 function findById(id) {
-  return db('media').where({ id }).first();
+  return db('media')
+          .where({id})
+          .first();
 };
 
 function add(mediaInfo) {

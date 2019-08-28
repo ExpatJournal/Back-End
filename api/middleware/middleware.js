@@ -92,7 +92,7 @@ function restricted(req, res, next) {
       };
     });
   } else {
-    res.status(400).json({ error: 'Auth token required' });
+    res.status(401).json({ error: 'Not Authorized' });
   };
 };
 

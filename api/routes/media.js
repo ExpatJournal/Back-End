@@ -25,7 +25,7 @@ const { id } = req.params;
 
   try{
     const media = await Media.findById(id);
-    if(media.length > 0) {
+    if(media) {
       res.status(200).json(media);
     } else {
       res.status(404).json({ error: 'there is no media for this post' })
