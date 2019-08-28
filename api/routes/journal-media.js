@@ -36,7 +36,7 @@ router.post('/:id/media', mw.restricted, mw.mediaCheck, async (req, res) => {
     }
   }
   catch(err) {
-    res.status(500).json({ error: 'something went wrong adding media to database' });
+    res.status(500).json(err)//{ error: 'something went wrong adding media to database' });
   };
 });
 
