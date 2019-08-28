@@ -24,7 +24,7 @@ server.use('/auth/comments', commentRouter);
 server.use('/api', publicRouter);
 
 server.get('/', (req, res) => {
-  res.send('<h2>5x5</h5>');
+  res.status(200).send('<h2>5x5</h2>');
 });
 
 module.exports = server;
