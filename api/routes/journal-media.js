@@ -28,7 +28,7 @@ router.post('/:id/media', mw.restricted, mw.mediaCheck, async (req, res) => {
     const owner_id = req.user.id;
     req.media.owner_id = owner_id;
     const media = await Media.add(req.media);
-    const linking = await Media.add(parseInt(req.params.id), media.id);
+    const linking = await Media.addConnect(parseInt(req.params.id), media.id);
     if(linking) {
       res.status(201).json(media);
     } else {
