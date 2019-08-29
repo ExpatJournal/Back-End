@@ -1,9 +1,7 @@
-# Back-End API Endpoints
-
-## PUBLIC
+# PUBLIC
 still in progress
 
-### GET /
+## GET /
 just a check to see server is up and running
 
 returns "5x5"
@@ -210,5 +208,3 @@ deleted specified comment
 **returns:**
 
   - 204
-
-  
