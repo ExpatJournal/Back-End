@@ -4,18 +4,25 @@ module.exports = {
   add,
   findBy,
   findById,
+  loginFindBy
+};
+
+function loginFindBy(filter) {
+  return db('users')
+            .where(filter)
+            .first();
 };
 
 function findBy(filter) {
   return db('users')
             .where(filter)
-            .select('id','username');
+            .select('id','displayName AS username');
 };
 
 function findById(id) {
   return db('users')
           .where({id})
-          .select('id','username')
+          .select('id','displayName AS username')
           .first();
 };
 
