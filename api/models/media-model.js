@@ -31,7 +31,7 @@ function findById(id) {
 
 function add(mediaInfo) {
   return db('media')
-          .insert(mediaInfo)
+          .insert(mediaInfo, 'id')
           .then( ids => {
             const [id] = ids;
             return findById(id);
@@ -43,7 +43,7 @@ function addConnect(journalId, mediaId) {
           .insert({
             post_id: journalId,
             media_id: mediaId
-          })
+          }, 'id')
           .then( ids => {
             const [id] = ids;
             return findById(id);
