@@ -22,7 +22,7 @@ describe('tests for comments', () => {
                 expect(Array.isArray(temp)).toBe(true);
                 for( obj of temp) {
                   expect(typeof obj).toBe('object');
-                }
+                };
               });
     });
 
