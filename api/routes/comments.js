@@ -25,7 +25,7 @@ router.post('/:id/comments', mw.restricted, mw.commentCheck, async (req, res) =>
           commentTxt = req.body.comment;
 
     const comment = await Comments.add(commentTxt, postId, userId);
-    res.status(200).json(comment);
+    res.status(201).json(comment);
   }
   catch(err) {
     res.status(500).json({ error: 'there was a problem adding the comment to the database' });

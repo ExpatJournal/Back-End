@@ -5,6 +5,7 @@ const db = require('../config/config');
 const server = require('../server');
 
 describe('server login & register tests', () => {
+
   beforeEach( async () => {
     let dbTest = await db('users');
     if(dbTest.length > 2) {
@@ -14,6 +15,7 @@ describe('server login & register tests', () => {
       };
     }
   });
+
   let token;
   const testObj = {
     username: 'John',
@@ -32,7 +34,7 @@ describe('server login & register tests', () => {
 
   describe('POST /auth/users/login', () => {
     
-    it('returns 401 unauthorize', () => {
+    it('returns 401 UNAUTHORIZED', () => {
       return request(server).post('/auth/users/login')
       .send({
         username: 'bhla',
