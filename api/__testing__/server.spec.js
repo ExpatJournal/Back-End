@@ -1,7 +1,7 @@
 const request = require('supertest');
 
-const db = require('./config/config');
-const server = require('./server');
+const db = require('../config/config');
+const server = require('../server');
 
 describe('server setup test', () => {
   it('tests if we are running DB_ENV as "testing"', () => {

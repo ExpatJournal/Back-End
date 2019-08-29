@@ -46,7 +46,7 @@ router.post('/register', mw.checkRegisterCredentials, async (req, res) => {
       res.status(409).json({ error: 'user already exists' });
     } else {
       res.status(500).json({ error: 'something went wrong adding user to database' });
-    }
+    };
   };
 });
 

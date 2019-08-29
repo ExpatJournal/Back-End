@@ -24,12 +24,14 @@ function findAll() {
 };
 
 function findById(id) {
-  return db('media').where({ id }).first();
+  return db('media')
+          .where({id})
+          .first();
 };
 
 function add(mediaInfo) {
   return db('media')
-          .insert(mediaInfo)
+          .insert(mediaInfo, 'id')
           .then( ids => {
             const [id] = ids;
             return findById(id);
@@ -41,7 +43,8 @@ function addConnect(journalId, mediaId) {
           .insert({
             post_id: journalId,
             media_id: mediaId
-          });
+          }, 'id')
+          .returning('id');
 };
 
 function remove(id) {
