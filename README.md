@@ -1,4 +1,4 @@
-# Back-End
+# Back-End API Endpoints
 
 # PUBLIC
 still in progress
@@ -11,13 +11,13 @@ returns "5x5"
 ## GET /api/user/:id
 returns all posts for specified author id
 
-	- id           : post id
-	- title        : post title
-	- author_id    : author id
-	- location     : location field
-	- post         : post content
-	- created_date : created date (_UNIX time_)
-	- updated_date : updated date (_UNIX time_)
+ - id           : post id
+ - title        : post title
+ - author_id    : author id
+ - location     : location field
+ - post         : post content
+ - created_date : created date (_UNIX time_)
+ - updated_date : updated date (_UNIX time_)
       (should be updated with newest updated/edit date)
     - media for post
         + id
