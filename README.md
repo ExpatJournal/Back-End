@@ -210,5 +210,3 @@ deleted specified comment
 **returns:**
 
   - 204
-
-  
