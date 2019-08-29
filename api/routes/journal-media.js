@@ -32,11 +32,11 @@ router.post('/:id/media', mw.restricted, mw.mediaCheck, async (req, res) => {
     if(linking) {
       res.status(201).json(media);
     } else {
-      res.status(400).json({ linking: linking });//{ error: 'something went wrong' });
+      res.status(400).json({ error: 'something went wrong' });
     }
   }
   catch(err) {
-    res.status(500).json({ linking: linking, media: media })//{ error: 'something went wrong adding media to database' });
+    res.status(500).json({ error: 'something went wrong adding media to database' });
   };
 });
 
