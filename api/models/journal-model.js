@@ -56,5 +56,5 @@ function remove(id, userId) {
               .andWhere('author_id', '=', userId)
           })
           .del()
-          .then( return true );
+          .then( res => true );
 }
