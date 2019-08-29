@@ -49,11 +49,18 @@ function update(postInfo, id, userId) {
           });
 }
 
-function remove(id, userId) {
-  return db('journal')
+async function remove(id, userId) {
+  await db('journal_media')
+          .where({post_id: id})
+          .del();
+  await db('comments')
+          .where({post_id: id})
+          .del();
+  await db('journal')
           .where( function() {
             this.where({ id })
               .andWhere('author_id', '=', userId)
           })
           .del();
+  return true;
 }

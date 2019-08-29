@@ -103,7 +103,7 @@ router.delete('/:id', mw.restricted, async (req, res) => {
     };
   }
   catch(err) {
-    res.status(500).json({ error: 'there was a problem deleteing the post from the database' });
+    res.status(500).json(err)//{ error: 'there was a problem deleteing the post from the database' });
   };
 });
 
