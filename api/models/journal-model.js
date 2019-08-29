@@ -61,6 +61,6 @@ async function remove(id, userId) {
             this.where({ id })
               .andWhere('author_id', '=', userId)
           })
-          .del()
-          .then( res => true );
+          .del();
+  return true;
 }
