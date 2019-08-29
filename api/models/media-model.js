@@ -44,10 +44,7 @@ function addConnect(journalId, mediaId) {
             post_id: journalId,
             media_id: mediaId
           }, 'id')
-          .then( ids => {
-            const [id] = ids;
-            return findById(id);
-          });
+          .returning('id');
 };
 
 function remove(id) {
