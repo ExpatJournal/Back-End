@@ -40,11 +40,11 @@ function add(mediaInfo) {
 
 function addConnect(journalId, mediaId) {
   return db('journal_media')
-          .returning('id')
           .insert({
             post_id: journalId,
             media_id: mediaId
-          });
+          }, 'id')
+          .then( res => true);
 };
 
 function remove(id) {
