@@ -28,7 +28,7 @@ router.post('/:id/comments', mw.restricted, mw.commentCheck, async (req, res) =>
     res.status(200).json(comment);
   }
   catch(err) {
-    res.status(500).json(err);//{ error: 'there was a problem adding the comment to the database' });
+    res.status(500).json({ error: 'there was a problem adding the comment to the database' });
   };
 });
 
